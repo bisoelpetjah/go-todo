@@ -1,0 +1,21 @@
+version: "3"
+services:
+    go-todo-dev:
+        image: canthefason/go-watcher
+        command: watcher -run github.com/bisoelpetjah/go-todo
+        ports:
+            - 3000:3000
+        volumes:
+            - ./:/go/src/github.com/bisoelpetjah/go-todo
+    go-todo-dev-mysql:
+        image: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: dev
+            MYSQL_PASSWORD: dev
+        volumes:
+            - ./mysql:/var/lib/mysql
+    go-todo-dev-mysql-admin:
+        image: adminer
+        ports:
+            - 4000:8080
